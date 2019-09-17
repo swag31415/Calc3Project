@@ -10,8 +10,14 @@ y_t=10.*cos(t)+5.*cos(5.*t)+2.5.*cos(2.3.*t);
 z_t=(0.001.*(t.^4)).*(1+(cos(2*pi.*t)).^2);
 
 % Defining the plot
-r = plot3(x_t,y_t,z_t,'b','LineWidth',2);
+r = plot3(x_t, y_t, z_t, 'b', 'LineWidth', 2);
 hold on; % Ensuring the 3d line stays and the markers below fall on said line
-r0 = plot3(x_t, y_t, z_t, 'o', 'MarkerFaceColor', 'green', 'MarkerEdgeColor', 'green', 'MarkerIndices', 1); % First Point
-r601 = plot3(x_t, y_t, z_t, 'o', 'MarkerFaceColor', 'red', 'MarkerEdgeColor', 'red', 'MarkerIndices', 602); % Last Point
+plot3(x_t, y_t, z_t, 'o', 'MarkerFaceColor', 'green', 'MarkerEdgeColor', 'green', 'MarkerIndices', 1); % First Point
+plot3(x_t, y_t, z_t, 'o', 'MarkerFaceColor', 'red', 'MarkerEdgeColor', 'red', 'MarkerIndices', 602); % Last Point
 hold off; % Done adding points
+
+% Starting coords
+c_steal = [x_t(1), y_t(1), z_t(1)];
+
+% Ending coords
+c_end = [x_t(602), y_t(602), z_t(602)];
