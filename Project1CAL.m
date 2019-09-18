@@ -34,12 +34,13 @@ c_end = [x_t(10), y_t(10), z_t(10)];
 disp = sqrt(((c_steal(1) - c_end(1))^2) + ((c_steal(2) - c_end(2))^2) + ((c_steal(3) - c_end(3))^2));
 
 % Computing the inside of the arc-length integral
-d = sqrt(((diff(x_set).^2) + (diff(y_set).^2) + (diff(z_set).^2))./(h^2));
+s = sqrt(((diff(x_set).^2) + (diff(y_set).^2) + (diff(z_set).^2))./(h^2));
+s_FtPerS = s.*(5280/60);
 
 % Computing the arclength integral using a Riemann Sum
 dist = 0;
-for i = 1:length(d)
-    dist = dist + (d(i) * h);
+for i = 1:length(s)
+    dist = dist + (s(i) * h);
 end
 
 % The amount of household garbage burned in tons
@@ -47,9 +48,20 @@ tons_of_garbage = (dist * 150) / 2000;
 
 % Plots speed where the x-axis is time in seconds and the y-axis is speed
 % in feet/sec
-plot(1:601, d.*(5280/60));
+plot(1:601, s_FtPerS);
 
 % Finds the maximum speed in feet/sec in the journey as well as the second
 % in which it occurs
-[maximum_value, time_of_maximum_value] = max(d.*(5280/60));
+[maximum_value, time_of_maximum_value] = max(s_FtPerS);
 
+% Gets an array of points for the accleration graph
+a = diff(s_FtPerS);
+
+% Plots accleration
+plot(1:600, a);
+
+% The accleration of gravity on planet Docbrown
+g = 340;
+
+% Whether we need medicine or not
+need_medicine = ((max(a) > 3*g) | (min(a) < -3*g));
