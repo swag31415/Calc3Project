@@ -31,7 +31,7 @@ c_steal = [x_t(0), y_t(0), z_t(0)];
 c_end = [x_t(10), y_t(10), z_t(10)];
 
 % Total displacement
-disp = sqrt(((c_steal(1) - c_end(1))^2) + ((c_steal(2) - c_end(2))^2) + ((c_steal(3) - c_end(3))^2))
+disp = sqrt(((c_steal(1) - c_end(1))^2) + ((c_steal(2) - c_end(2))^2) + ((c_steal(3) - c_end(3))^2));
 
 % Computing the inside of the arc-length integral
 d = sqrt(((diff(x_set).^2) + (diff(y_set).^2) + (diff(z_set).^2))./(h^2));
@@ -41,4 +41,7 @@ dist = 0;
 for i = 1:length(d)
     dist = dist + (d(i) * h);
 end
+
+% The amount of household garbage burned in tons
+tons_of_garbage = (dist * 150) / 2000;
 
