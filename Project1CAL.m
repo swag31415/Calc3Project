@@ -45,3 +45,11 @@ end
 % The amount of household garbage burned in tons
 tons_of_garbage = (dist * 150) / 2000;
 
+% Plots speed where the x-axis is time in seconds and the y-axis is speed
+% in feet/sec
+plot(1:601, d.*(5280/60));
+
+% Finds the maximum speed in feet/sec in the journey as well as the second
+% in which it occurs
+[maximum_value, time_of_maximum_value] = max(d.*(5280/60));
+
