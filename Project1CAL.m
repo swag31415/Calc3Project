@@ -107,3 +107,20 @@ quiver3(R_905(1), R_905(2), R_905(3), N_905(1), N_905(2), N_905(3), 'Color', [0,
 quiver3(R_905(1), R_905(2), R_905(3), B_905(1), B_905(2), B_905(3), 'Color', [0, 0, 1]);
 quiver3(R_905(1), R_905(2), R_905(3), Ax_set(10 * (543 + 1)), Ay_set(10 * (543 + 1)), Az_set(10 * (543 + 1)), 'Color', [0, 0, 0]);
 hold off;
+
+% Doing the same for every 5 seconds from 525s to 550s
+plot3(x_t(520/60:0.001:555/60), y_t(520/60:0.001:555/60), z_t(520/60:0.001:555/60), 'b', 'LineWidth', 2);
+hold on;
+for v = 525:5:550
+    
+    T_n = [Tx_set(10 * (v + 1)), Ty_set(10 * (v + 1)), Tz_set(10 * (v + 1))];
+    N_n = [Nx_set(10 * (v + 1)), Ny_set(10 * (v + 1)), Nz_set(10 * (v + 1))];
+    B_n = cross(T_905, N_905);
+    
+    R_n = [x_t(v/60), y_t(v/60), z_t(v/60)];
+
+    quiver3(R_n(1), R_n(2), R_n(3), T_n(1), T_n(2), T_n(3), 'Color', [1, 0, 0]);
+    quiver3(R_n(1), R_n(2), R_n(3), N_n(1), N_n(2), N_n(3), 'Color', [0, 1, 0]);
+    quiver3(R_n(1), R_n(2), R_n(3), B_n(1), B_n(2), B_n(3), 'Color', [0, 0, 1]);
+end
+hold off;
