@@ -65,3 +65,45 @@ g = 340;
 
 % Whether we need medicine or not
 need_medicine = ((max(a) > 3*g) | (min(a) < -3*g));
+
+% Bumping up accuracy
+domain = 0:(1/601):10;
+x_set = x_t(domain);
+y_set = y_t(domain);
+z_set = z_t(domain);
+
+% Calculating T
+Ts = sqrt(((diff(x_set).^2) + (diff(y_set).^2) + (diff(z_set).^2)));
+Tx_set = diff(x_set)./Ts;
+Ty_set = diff(y_set)./Ts;
+Tz_set = diff(z_set)./Ts;
+plot(Tz_set);
+
+% Calculating N
+Ns = sqrt(((diff(Tx_set).^2) + (diff(Ty_set).^2) + (diff(Tz_set).^2)));
+Nx_set = diff(Tx_set)./Ns;
+Ny_set = diff(Ty_set)./Ns;
+Nz_set = diff(Tz_set)./Ns;
+
+% Calculating unit Accleration
+As = sqrt(((diff(diff(x_set)).^2) + (diff(diff(y_set)).^2) + (diff(diff(z_set)).^2)));
+Ax_set = diff(diff(x_set))./As;
+Ay_set = diff(diff(y_set))./As;
+Az_set = diff(diff(z_set))./As;
+
+% Finding TNB at 543 seconds
+T_905 = [Tx_set(10 * (543 + 1)), Ty_set(10 * (543 + 1)), Tz_set(10 * (543 + 1))];
+N_905 = [Nx_set(10 * (543 + 1)), Ny_set(10 * (543 + 1)), Nz_set(10 * (543 + 1))];
+B_905 = cross(T_905, N_905);
+
+% The base of the vectors
+R_905 = [x_t(9.05), y_t(9.05), z_t(9.05)];
+
+% Plotting it all
+plot3(x_t(8.9333:0.001:9.0833), y_t(8.9333:0.001:9.0833), z_t(8.9333:0.001:9.0833), 'b', 'LineWidth', 2);
+hold on;
+quiver3(R_905(1), R_905(2), R_905(3), T_905(1), T_905(2), T_905(3), 'Color', [1, 0, 0]);
+quiver3(R_905(1), R_905(2), R_905(3), N_905(1), N_905(2), N_905(3), 'Color', [0, 1, 0]);
+quiver3(R_905(1), R_905(2), R_905(3), B_905(1), B_905(2), B_905(3), 'Color', [0, 0, 1]);
+quiver3(R_905(1), R_905(2), R_905(3), Ax_set(10 * (543 + 1)), Ay_set(10 * (543 + 1)), Az_set(10 * (543 + 1)), 'Color', [0, 0, 0]);
+hold off;
