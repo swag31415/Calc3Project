@@ -124,3 +124,8 @@ for v = 525:5:550
     quiver3(R_n(1), R_n(2), R_n(3), B_n(1), B_n(2), B_n(3), 'Color', [0, 0, 1]);
 end
 hold off;
+
+% Plotting curvature using the formula k=|T'(t)|
+k = sqrt(((diff(Tx_set).^2) + (diff(Ty_set).^2) + (diff(Tz_set).^2)));
+plot(0:10/6008:10, k);
+
